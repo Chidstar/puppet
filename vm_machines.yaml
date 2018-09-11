@@ -1,0 +1,56 @@
+---
+- name: master
+  box: centos/7
+  cpus: 2
+  memory: 1024
+  guest_port: 9000
+  host_port: 9000
+  private_ip: 10.0.10.10
+  public_ip: 192.168.0.17
+  hostname: master.puppet
+  package_manager: yum
+  packages:
+  - git
+  - nano
+  scripts:
+  - python_server
+  synced_folders:
+  - host: /Users/Admin/Desktop/Share
+    guest: /home/jenkins/synced 
+ 
+- name: agent
+  box: centos/7
+  cpus: 2
+  memory: 1024
+  guest_port: 9000
+  host_port: 9001
+  private_ip: 10.0.10.11
+  public_ip: 192.168.0.18
+  hostname: agent.puppet
+  package_manager: yum
+  packages:
+  - git
+  - nano
+  scripts:
+  - python_server 
+  synced_folders:
+  - host: /Users/Admin/Desktop/Share
+    guest: /home/jenkins/synced
+
+- name: agent_2
+  box: ubuntu
+  cpus: 1
+  memory: 2048
+  guest_port: 9000
+  host_port: 9002
+  private_ip: 10.0.10.10
+  package_manager: yum
+  packages:
+  - git
+  - nano 
+  - wget
+  - unzip
+  scripts:
+  - terraform
+  - google_cloud_sdk
+...
