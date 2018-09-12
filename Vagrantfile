@@ -29,11 +29,11 @@ Vagrant.configure("2") do |config|
     config.vm.define guest['name'] do |guest_vm|
 	set_box(guest, guest_vm)
 	set_cpus_and_memory(guest, guest_vm)
-	set_private_ip(guest, guest_vm)
+	set_public_ip(guest, guest_vm)
 	set_hostname(guest, guest_vm)
 	install_packages(guest, guest_vm)
 #	run_scripts(guest, guest_vm)
-#	set_forward_ports(guest, guest_vm)
+	set_forward_ports(guest, guest_vm)
 	set_synced_folders(guest, guest_vm)
     end
   end
@@ -46,7 +46,7 @@ def set_cpus_and_memory(guest, guest_vm)
 	end
 end
 
-def set_private_ip(guest, guest_vm)
+def set_public_ip(guest, guest_vm)
 	guest_vm.vm.network "public_network", ip: guest['public_ip']
 end
 
@@ -79,7 +79,6 @@ def install_packages(guest, guest_vm)
 end
 
 def run_scripts(guest, guest_vm)
-#	install_packages(guest, guest_vm)
 	unless guest['scripts'].nil?
 		guest['scripts'].each do |script|
 			guest_vm.vm.provision "shell", privileged: false, path: "/Users/Admin/Documents/terraform/vagrant_scripts/#{script}"
