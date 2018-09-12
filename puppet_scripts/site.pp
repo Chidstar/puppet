@@ -1,4 +1,4 @@
-$admin_packages = ['java','maven','git']
+$admin_packages = ['maven','git']
 
 class node_install {
   package { $admin_packages:
@@ -13,21 +13,22 @@ class ntp (Array[String] $servers) {
 }
 
 class jenkins {
-  $packages = ['wget']
+  $packages = ['java','wget']
     package { $packages:
       ensure => installed,
     }
     exec { 'get_repo':
-      command => 'wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins/repo',
+      command => 'wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo',
       path => '/usr/local/bin/:/bin/',
     }
-    exec {'import_rpm':
+    exec { 'import_rpm':
       command => 'rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key',
-      path => '/usr/local/bin/:/bin/'
+      path => '/usr/local/bin/:/bin/',
     }
     package { 'jenkins':
       ensure => installed,
     }
+
     service { 'jenkins':
       ensure => 'running',
       enable => true
@@ -51,4 +52,12 @@ node 'agent.puppet' {
 
   class { 'jenkins': }
 }
+
+node 'ubuntu-xenial' {
+  include lamp
+}
+
+
+
+
 

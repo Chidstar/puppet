@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
 	set_cpus_and_memory(guest, guest_vm)
 	set_public_ip(guest, guest_vm)
 	set_hostname(guest, guest_vm)
-	install_packages(guest, guest_vm)
+#	install_packages(guest, guest_vm)
 #	run_scripts(guest, guest_vm)
 	set_forward_ports(guest, guest_vm)
 	set_synced_folders(guest, guest_vm)

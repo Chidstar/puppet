@@ -38,16 +38,18 @@
     guest: /home/jenkins/synced
 
 - name: agent_2
-  box: ubuntu
-  cpus: 1
-  memory: 2048
-  guest_port: 9000
-  host_port: 9003
-  private_ip: 10.0.10.10
-  package_manager: yum
+  box: ubuntu/xenial64
+  cpus: 2
+  memory: 1024
+  guest_port: 80
+  host_port: 8082
+  private_ip: 10.0.10.12
+  public_ip: 192.168.0.19
+  hostname: agent2.puppet
+  package_manager: apt
   packages:
   - git
-  - nano 
+  - nano
   - wget
   - unzip
   scripts:
