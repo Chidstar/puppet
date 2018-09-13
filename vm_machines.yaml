@@ -4,7 +4,7 @@
   cpus: 2
   memory: 1024
   guest_port: 80
-  host_port: 8080
+  host_port: 8081
   private_ip: 10.0.10.10
   public_ip: 192.168.0.17
   hostname: master.puppet
@@ -22,8 +22,8 @@
   box: centos/7
   cpus: 2
   memory: 1024
-  guest_port: 80
-  host_port: 8081
+  guest_port: 8080
+  host_port: 8080
   private_ip: 10.0.10.11
   public_ip: 192.168.0.18
   hostname: agent.puppet
